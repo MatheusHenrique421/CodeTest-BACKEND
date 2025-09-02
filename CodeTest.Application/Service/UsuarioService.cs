@@ -1,7 +1,7 @@
-﻿using CodeTest.Application.Dtos;
-using CodeTest.Application.Factories;
-using CodeTest.Application.Interfaces.Services;
+﻿using CodeTest.Application.Interfaces.Services;
 using CodeTest.Domain.Interfaces.Repositories;
+using CodeTest.Application.Factories;
+using CodeTest.Application.Dtos;
 
 namespace CodeTest.Application.Service
 {

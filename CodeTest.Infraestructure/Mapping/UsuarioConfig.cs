@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using CodeTest.Domain.Entities;
+using System.Reflection.Emit;
 
 namespace CodeTest.Infraestructure.Mapping
 {
@@ -30,7 +31,10 @@ namespace CodeTest.Infraestructure.Mapping
 
 			builder.Property(u => u.Excluido).HasColumnName("Excluido");
 
-
+			// Relacionamento 1:1 Usuario ↔ Pessoa
+			builder.HasOne(u => u.Pessoa)
+				   .WithOne(p => p.Usuario)
+				   .HasForeignKey<Usuario>(u => u.PessoaId);
 
 		}
 	}

@@ -34,6 +34,11 @@ namespace CodeTest.Application.Factories
 			if (dto.Email != null)
 				usuario.Email = dto.Email;
 
+			if (dto.Senha != null)
+				usuario.SenhaHash = dto.Senha;
+
+			usuario.DataAlteracao = DateTime.Now;
+
 			return usuario;
 		}
 
@@ -45,7 +50,9 @@ namespace CodeTest.Application.Factories
 				Id = usuario.Id,
 				Nome = usuario.Nome,
 				Email = usuario.Email,
-				Role = usuario.Role
+				Senha = usuario.SenhaHash,
+				Role = usuario.Role,
+				DataCriacao = usuario.DataCriacao
 			};
 		}
 	}

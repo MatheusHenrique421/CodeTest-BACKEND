@@ -4,6 +4,7 @@ using CodeTest.Infraestructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTest.Infraestructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806005657_ProjetoInicial")]
+    partial class ProjetoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,66 +24,6 @@ namespace CodeTest.Infraestructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CodeTest.Domain.Entities.Endereco", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Bairro");
-
-                    b.Property<string>("CEP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CEP");
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Cidade");
-
-                    b.Property<string>("Complemento")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Complemento");
-
-                    b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Estado");
-
-                    b.Property<bool>("Excluido")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Numero");
-
-                    b.Property<Guid>("PessoaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Rua")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Rua");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PessoaId")
-                        .IsUnique();
-
-                    b.ToTable("Enderecos", (string)null);
-                });
 
             modelBuilder.Entity("CodeTest.Domain.Entities.Pessoa", b =>
                 {
@@ -178,17 +121,6 @@ namespace CodeTest.Infraestructure.Migrations
                     b.ToTable("Usuarios", (string)null);
                 });
 
-            modelBuilder.Entity("CodeTest.Domain.Entities.Endereco", b =>
-                {
-                    b.HasOne("CodeTest.Domain.Entities.Pessoa", "Pessoa")
-                        .WithOne("Endereco")
-                        .HasForeignKey("CodeTest.Domain.Entities.Endereco", "PessoaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pessoa");
-                });
-
             modelBuilder.Entity("CodeTest.Domain.Entities.Usuario", b =>
                 {
                     b.HasOne("CodeTest.Domain.Entities.Pessoa", "Pessoa")
@@ -202,10 +134,7 @@ namespace CodeTest.Infraestructure.Migrations
 
             modelBuilder.Entity("CodeTest.Domain.Entities.Pessoa", b =>
                 {
-                    b.Navigation("Endereco");
-
-                    b.Navigation("Usuario")
-                        .IsRequired();
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }
